@@ -4855,6 +4855,9 @@ def bracket_split_build_line(
                         continue
 
                     if leaves[i].type != token.COMMA:
+                        # FIXME BUG - Issue 1356 - This code needs to check if
+                        # Feature.TRAILING_COMMA_IN_DEF is available when dealing with
+                        # starred parameters.
                         leaves.insert(i + 1, Leaf(token.COMMA, ","))
                     break
 
