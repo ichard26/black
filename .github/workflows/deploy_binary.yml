@@ -1,0 +1,29 @@
+name: Deploy OS specific binaries
+
+on:
+  push:
+    branches: [binaries]
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    container: quay.io/pypa/manylinux10_x86_64
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          /opt/python/cp37-cp37m/bin/python -m pip install --upgrade pip wheel setuptools
+          /opt/python/cp37-cp37m/bin/python -m pip install .
+          /opt/python/cp37-cp37m/bin/python -m pip install pyinstaller
+
+      - name: Build binary
+        run: |
+          cd src
+          /opt/python/cp37-cp37m/bin/python -m pyinstaller --clean -F --name black.elf --add-data blib2to3/:blib2to3 black/__main__.py
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: black.elf
+          path: dist/black.elf
