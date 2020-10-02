@@ -7,7 +7,7 @@ on:
 jobs:
   linux:
     runs-on: ubuntu-latest
-    container: https://www.quay.io/pypa/manylinux10_x86_64
+    container: quay.io/pypa/manylinux2010_x86_64
 
     steps:
       - uses: actions/checkout@v2
@@ -23,7 +23,8 @@ jobs:
           cd src
           /opt/python/cp37-cp37m/bin/python -m pyinstaller --clean -F --name black.elf --add-data blib2to3/:blib2to3 black/__main__.py
 
-      - uses: actions/upload-artifact@v2
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
         with:
           name: black.elf
           path: dist/black.elf
