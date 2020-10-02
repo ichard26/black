@@ -21,7 +21,7 @@ jobs:
       - name: Build binary
         run: |
           cd src
-          /opt/python/cp37-cp37m/bin/python -m pyinstaller --clean -F --name black.elf --add-data blib2to3/:blib2to3 black/__main__.py
+          /opt/python/cp37-cp37m/bin/python -m PyInstaller --clean -F --name black.elf --add-data blib2to3/:blib2to3 black/__main__.py
 
       - name: Upload binary
         uses: actions/upload-artifact@v2
