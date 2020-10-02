@@ -7,7 +7,7 @@ on:
 jobs:
   linux:
     runs-on: ubuntu-latest
-    container: quay.io/pypa/manylinux10_x86_64
+    container: https://www.quay.io/pypa/manylinux10_x86_64
 
     steps:
       - uses: actions/checkout@v2
