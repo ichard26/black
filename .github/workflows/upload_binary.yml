@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: black.elf
-          path: src/dist/black.elf
+          path: dist/black.elf
 
   windows:
     runs-on: windows-2019
@@ -57,4 +57,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: black.exe
-          path: src/dist/black.exe
+          path: dist/black.exe
