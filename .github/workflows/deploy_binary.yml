@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: black.elf
-          path: dist/black.elf
+          path: src/dist/black.elf
