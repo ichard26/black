@@ -1,14 +1,20 @@
 name: Upload self-contained binaries
 
 on:
-  push:
-    branches: [binaries]
+  release:
+    types: [published]
 
 jobs:
   linux:
     runs-on: ubuntu-16.04
 
     steps:
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/checkout@v2
 
       - name: Set up Python 3.7
@@ -26,16 +32,26 @@ jobs:
         run: |
           python -m PyInstaller --clean -F --name black.elf --add-data src/blib2to3:blib2to3 src/black/__main__.py
 
-      - name: Upload binary
-        uses: actions/upload-artifact@v2
+      - name: Upload binary as release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: black.elf
-          path: dist/black.elf
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: dist/black.elf
+          asset_name: black.elf
+          asset_content_type: application/x-executable
 
   windows:
     runs-on: windows-2019
 
     steps:
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/checkout@v2
 
       - name: Set up Python 3.7
@@ -53,8 +69,12 @@ jobs:
         run: |
           python -m PyInstaller --clean -F --name black.exe --add-data 'src\blib2to3;blib2to3' src\black\__main__.py
 
-      - name: Upload binary
-        uses: actions/upload-artifact@v2
+      - name: Upload binary as release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: black.exe
-          path: dist/black.exe
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: dist/black.exe
+          asset_name: black.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
