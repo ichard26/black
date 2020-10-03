@@ -1,4 +1,4 @@
-name: Deploy self-contained binaries
+name: Upload self-contained binaries
 
 on:
   push:
@@ -24,8 +24,7 @@ jobs:
 
       - name: Build binary
         run: |
-          cd src
-          python -m PyInstaller --clean -F --name black.elf --add-data blib2to3/:blib2to3 black/__main__.py
+          python -m PyInstaller --clean -F --name black.elf --add-data src/blib2to3:blib2to3 src/black/__main__.py
 
       - name: Upload binary
         uses: actions/upload-artifact@v2
@@ -52,8 +51,7 @@ jobs:
 
       - name: Build binary
         run: |
-          cd src
-          python -m PyInstaller --clean -F --name black.exe --add-data 'blib2to3;blib2to3' black\__main__.py
+          python -m PyInstaller --clean -F --name black.exe --add-data 'src\blib2to3;blib2to3' src\black\__main__.py
 
       - name: Upload binary
         uses: actions/upload-artifact@v2
