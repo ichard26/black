@@ -1,4 +1,4 @@
-name: Deploy OS specific binaries
+name: Deploy self-contained binaries
 
 on:
   push:
@@ -32,3 +32,31 @@ jobs:
         with:
           name: black.elf
           path: src/dist/black.elf
+
+  windows:
+    runs-on: windows-2019
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip wheel setuptools
+          python -m pip install .
+          python -m pip install pyinstaller
+
+      - name: Build binary
+        run: |
+          cd src
+          python -m PyInstaller --clean -F --name black.exe --add-data blib2to3/:blib2to3 black/__main__.py
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: black.exe
+          path: src/dist/black.exe
