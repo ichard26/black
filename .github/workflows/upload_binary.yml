@@ -23,12 +23,6 @@ jobs:
             executable_mime: "application/x-executable"
 
     steps:
-      - name: Get release asset upload URL from release tag
-        id: get_release
-        uses: bruceadams/get-release@8a90bac3fc6cb911f53d22ce10868b5831f2d244
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/checkout@v2
 
       - name: Set up Python ${{ matrix.python-version }}
@@ -51,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          upload_url: ${{ github.event.release.upload_url }}
           asset_path: dist/black${{ matrix.executable_suffix }}
           asset_name: black${{ matrix.executable_suffix }}
           asset_content_type: ${{ matrix.executable_mime }}
