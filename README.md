@@ -411,7 +411,7 @@ jobs:
       - uses: actions/setup-python@v2
       - uses: psf/black@stable
         with:
-          args: ". --check"
+          black_args: ". --check"
 ```
 
 ### Inputs
