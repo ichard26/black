@@ -42,6 +42,29 @@ and `pipenv <https://docs.pipenv.org/>`_:
 
    *This vastly improves the formatting of our code. Thanks a ton!*
 
+
+Show your style
+---------------
+
+Use the badge in your project's README.md:
+
+.. code-block:: md
+
+   [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+
+Using the badge in README.rst:
+
+.. code-block:: rst
+
+   .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+      :target: https://github.com/psf/black
+
+Looks like this:
+
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/psf/black
+
 Contents
 --------
 
