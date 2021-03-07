@@ -4,7 +4,7 @@
 
 ## Installation
 
-_Black_ can be installed by running `pip install black`. It requires Python 3.6.0+ to
+_Black_ can be installed by running `pip install black`. It requires Python 3.6.2+ to
 run but you can reformat Python 2 code with it, too.
 
 ### Install from GitHub
@@ -90,15 +90,16 @@ Options:
                                   hg|\.mypy_cache|\.nox|\.tox|\.venv|\.svn|_bu
                                   ild|buck-out|build|dist)/]
 
+  --extend-exclude TEXT           Like --exclude, but adds additional files
+                                  and directories on top of the excluded
+                                  ones (useful if you simply want to add to
+                                  the default).
+
   --force-exclude TEXT            Like --exclude, but files and directories
                                   matching this regex will be excluded even
                                   when they are passed explicitly as
                                   arguments.
 
-  --extend-exclude TEXT           Like --exclude, but adds additional files
-                                  and directories on top of the excluded
-                                  ones. (useful if you simply want to add to
-                                  the default)
 
   --stdin-filename TEXT           The name of the file when passing it through
                                   stdin. Useful to make sure Black will

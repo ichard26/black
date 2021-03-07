@@ -269,7 +269,8 @@ above. What seems like a bug might be intended behaviour.
 
 _Black_ is able to read project-specific default values for its command line options
 from a `pyproject.toml` file. This is especially useful for specifying custom
-`--include` and `--exclude`/`--extend-exclude` patterns for your project.
+`--include` and `--exclude`/`--force-exclude`/`--extend-exclude` patterns for your
+project.
 
 **Pro-tip**: If you're asking yourself "Do I need to configure anything?" the answer is
 "No". _Black_ is all about sensible defaults.
@@ -649,6 +650,7 @@ Multiple contributions by:
 - [Pablo Galindo](mailto:Pablogsal@gmail.com)
 - [Paul Ganssle](mailto:p.ganssle@gmail.com)
 - [Paul Meinhardt](mailto:mnhrdt@gmail.com)
+- [Paul "TBBle" Hampson](mailto:Paul.Hampson@Pobox.com)
 - [Peter Bengtsson](mailto:mail@peterbe.com)
 - [Peter Grayson](mailto:pete@jpgrayson.net)
 - [Peter Stensmyr](mailto:peter.stensmyr@gmail.com)

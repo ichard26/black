@@ -28,7 +28,12 @@
 
 - use lowercase hex strings (#1692)
 
-- added `--extend-exclude` argument (#1571)
+- speed up caching by avoiding pathlib (#1950)
+
+- `--diff` correctly indicates when a file doesn't end in a newline (#1662)
+
+- Added `--stdin-filename` argument to allow stdin to respect `--force-exclude` rules
+  (#1780)
 
 #### _Packaging_
 
