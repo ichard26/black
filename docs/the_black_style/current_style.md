@@ -1,12 +1,13 @@
-# The _Black_ code style
+# The _Black_ Code Style
 
 ## Code style
 
 _Black_ reformats entire files in place. It is not configurable. It doesn't take
 previous formatting into account. It doesn't reformat blocks that start with
-`# fmt: off` and end with `# fmt: on`. `# fmt: on/off` have to be on the same level of
-indentation. It also recognizes [YAPF](https://github.com/google/yapf)'s block comments
-to the same effect, as a courtesy for straddling code.
+`# fmt: off` and end with `# fmt: on`, or lines that ends with `# fmt: skip`.
+`# fmt: on/off` have to be on the same level of indentation. It also recognizes
+[YAPF](https://github.com/google/yapf)'s block comments to the same effect, as a
+courtesy for straddling code.
 
 ### How _Black_ wraps lines
 
@@ -75,7 +76,9 @@ def very_important_function(
         ...
 ```
 
-_Black_ prefers parentheses over backslashes, and will remove backslashes if found.
+<p id="why-no-backslashes">
+  <em>Black</em> prefers parentheses over backslashes, and will remove backslashes if found.
+</p>
 
 ```py3
 # in:
@@ -114,29 +117,6 @@ to look at and brittle to modify. This is why _Black_ always gets rid of them.
 If you're reaching for backslashes, that's a clear signal that you can do better if you
 slightly refactor your code. I hope some of the examples above show you that there are
 many ways in which you can do it.
-
-However there is one exception: `with` statements using multiple context managers.
-Python's grammar does not allow organizing parentheses around the series of context
-managers.
-
-We don't want formatting like:
-
-```py3
-with make_context_manager1() as cm1, make_context_manager2() as cm2, make_context_manager3() as cm3, make_context_manager4() as cm4:
-    ...  # nothing to split on - line too long
-```
-
-So _Black_ will now format it like this:
-
-```py3
-with \
-     make_context_manager(1) as cm1, \
-     make_context_manager(2) as cm2, \
-     make_context_manager(3) as cm3, \
-     make_context_manager(4) as cm4 \
-:
-    ...  # backslashes and an ugly stranded colon
-```
 
 You might have noticed that closing brackets are always dedented and that a trailing
 comma is always added. Such formatting produces smaller diffs; when you add or remove an
@@ -438,7 +418,7 @@ into one item per line.
 How do you make it stop? Just delete that trailing comma and _Black_ will collapse your
 collection into one line if it fits.
 
-If you must, you can recover the behaviour of early versions of Black with the option
+If you must, you can recover the behaviour of early versions of _Black_ with the option
 `--skip-magic-trailing-comma` / `-C`.
 
 ### r"strings" and R"strings"
